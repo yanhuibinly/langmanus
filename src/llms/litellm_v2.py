@@ -120,7 +120,7 @@ class ChatLiteLLMV2(ChatLiteLLM):
                 )
             tool_name = convert_to_openai_tool(schema)["function"]["name"]
             bind_kwargs = self._filter_disabled_params(
-                tool_choice='auto',
+                tool_choice="auto",
                 parallel_tool_calls=False,
                 strict=strict,
                 ls_structured_output_format={
@@ -128,7 +128,7 @@ class ChatLiteLLMV2(ChatLiteLLM):
                     "schema": schema,
                 },
             )
-            
+
             llm = self.bind_tools([schema], **bind_kwargs)
             if is_pydantic_schema:
                 output_parser: Runnable = PydanticToolsParser(
@@ -214,5 +214,6 @@ class ChatLiteLLMV2(ChatLiteLLM):
             "tools",
             "tool-use",
             "response_format",
+            "parallel_tool_calls",
         }
         return supported_params
