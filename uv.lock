@@ -980,10 +980,12 @@ dependencies = [
     { name = "langchain-community" },
     { name = "langchain-deepseek" },
     { name = "langchain-experimental" },
+    { name = "langchain-mcp-adapters" },
     { name = "langchain-openai" },
     { name = "langgraph" },
     { name = "litellm" },
     { name = "markdownify" },
+    { name = "mcp" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "python-dotenv" },
@@ -1014,10 +1016,12 @@ requires-dist = [
     { name = "langchain-community", specifier = ">=0.3.19" },
     { name = "langchain-deepseek", specifier = ">=0.1.2" },
     { name = "langchain-experimental", specifier = ">=0.3.4" },
+    { name = "langchain-mcp-adapters", specifier = ">=0.0.3" },
     { name = "langchain-openai", specifier = ">=0.3.8" },
     { name = "langgraph", specifier = ">=0.3.5" },
     { name = "litellm", specifier = ">=1.63.11" },
     { name = "markdownify", specifier = ">=1.1.0" },
+    { name = "mcp", specifier = ">=1.5.0" },
     { name = "numpy", specifier = ">=2.2.3" },
     { name = "pandas", specifier = ">=2.2.3" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=7.4.0" },
@@ -1174,6 +1178,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/43/ef/1df5184057b3c49f0f67a8daf59e39b23cdc3267b613451389cd72b24729/langchain_google_genai-2.0.11.tar.gz", hash = "sha256:ff6997eee872f0732036129173f4c1740b03fbb1f13251805d51d6c08bf8b34d", size = 35444 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c5/bc/233352abbf0d2a1ea2d7748915a8aac63accd2ce893ac0d42a86d529c823/langchain_google_genai-2.0.11-py3-none-any.whl", hash = "sha256:c98b18524a78fcc7084ba5ac69ea6a1a69b0b693255de68245b98bbbc3f08e87", size = 39792 },
+]
+
+[[package]]
+name = "langchain-mcp-adapters"
+version = "0.0.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+    { name = "mcp" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d7/6d/77278958ec8f3388dcb69af969198430a37776cabfe025e76a87bcd00218/langchain_mcp_adapters-0.0.3.tar.gz", hash = "sha256:08dd2e833ed7f7e49130bcb3cfdaae0fafbbc0083e9f77ba3fb85eedca64c61a", size = 5781 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1d/fa/364507dd70c88f03965ccd00102e98cfed5111c165f0d4c499e2a70fef38/langchain_mcp_adapters-0.0.3-py3-none-any.whl", hash = "sha256:c8d987878d76beb14f37c77391db9717719ce7c5d749536b53bb4afd68d11a7d", size = 7046 },
 ]
 
 [[package]]
@@ -1463,6 +1480,25 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ab/5e/5e53d26b42ab75491cda89b871dab9e97c840bf12c63ec58a1919710cd06/marshmallow-3.26.1.tar.gz", hash = "sha256:e6d8affb6cb61d39d26402096dc0aee12d5a26d490a121f118d2e81dc0719dc6", size = 221825 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/34/75/51952c7b2d3873b44a0028b1bd26a25078c18f92f256608e8d1dc61b39fd/marshmallow-3.26.1-py3-none-any.whl", hash = "sha256:3350409f20a70a7e4e11a27661187b77cdcaeb20abca41c1454fe33636bea09c", size = 50878 },
+]
+
+[[package]]
+name = "mcp"
+version = "1.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "httpx" },
+    { name = "httpx-sse" },
+    { name = "pydantic" },
+    { name = "pydantic-settings" },
+    { name = "sse-starlette" },
+    { name = "starlette" },
+    { name = "uvicorn" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6d/c9/c55764824e893fdebe777ac7223200986a275c3191dba9169f8eb6d7c978/mcp-1.5.0.tar.gz", hash = "sha256:5b2766c05e68e01a2034875e250139839498c61792163a7b221fc170c12f5aa9", size = 159128 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c1/d1/3ff566ecf322077d861f1a68a1ff025cad337417bd66ad22a7c6f7dfcfaf/mcp-1.5.0-py3-none-any.whl", hash = "sha256:51c3f35ce93cb702f7513c12406bbea9665ef75a08db909200b07da9db641527", size = 73734 },
 ]
 
 [[package]]

@@ -5,6 +5,9 @@ import logging
 from copy import deepcopy
 from typing import Literal
 from langchain_core.messages import HumanMessage, BaseMessage
+from src.agents.agents import create_agent
+from src.tools.file_management import write_file_tool
+
 
 import json_repair
 from langchain_core.messages import HumanMessage
@@ -209,5 +212,18 @@ def reporter_node(state: State) -> Command[Literal["supervisor"]]:
                 )
             ]
         },
+        goto="supervisor",
+    )
+
+
+def save_file_node(state: State) -> Command[Literal["supervisor"]]:
+
+    # save plan to local file
+    file_manager_agent = create_agent("file_manager", [write_file_tool], "file_manager")
+    result = file_manager_agent.invoke(state)
+    response_content = result["messages"][-1].content
+    logger.debug(f"save_file response: {response_content}")
+    return Command(
+        update={},
         goto="supervisor",
     )

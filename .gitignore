@@ -20,3 +20,4 @@ conf.yaml
 
 .idea/
 .vscode
+*.lock

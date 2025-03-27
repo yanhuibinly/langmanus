@@ -1,6 +1,7 @@
 import logging
-from src.config import TEAM_MEMBER_CONFIGRATIONS, TEAM_MEMBERS
-from src.graph import build_graph
+from .config import TEAM_MEMBER_CONFIGRATIONS, TEAM_MEMBERS
+from .graph import build_graph
+from langchain_mcp_adapters.client import MultiServerMCPClient
 
 # Configure logging
 logging.basicConfig(
@@ -20,6 +21,25 @@ logger = logging.getLogger(__name__)
 graph = build_graph()
 
 
+async def init_mcp_tools():
+    async with MultiServerMCPClient(
+        {
+            "filesystem": {
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-filesystem",
+                    "/Users/yanhuibin/myData",
+                    "/Users/yanhuibin/myData",
+                ],
+                "transport": "stdio",
+            }
+        }
+    ) as client:
+        tools = client.get_tools()
+        return tools
+
+
 def run_agent_workflow(user_input: str, debug: bool = False):
     """Run the agent workflow with the given user input.
 
@@ -37,6 +57,12 @@ def run_agent_workflow(user_input: str, debug: bool = False):
         enable_debug_logging()
 
     logger.info(f"Starting workflow with user input: {user_input}")
+
+    # 初始化 MCP 工具
+    import asyncio
+
+    mcp_tools = asyncio.run(init_mcp_tools())
+
     result = graph.invoke(
         {
             # Constants
@@ -46,6 +72,8 @@ def run_agent_workflow(user_input: str, debug: bool = False):
             "messages": [{"role": "user", "content": user_input}],
             "deep_thinking_mode": True,
             "search_before_planning": True,
+            # MCP Tools
+            "mcp_tools": mcp_tools,
         }
     )
     logger.debug(f"Final workflow state: {result}")
